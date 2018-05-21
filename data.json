@@ -1,0 +1,13 @@
+[{
+    "id": 1,
+    "title": "Forrest Gump",
+    "duration": "142",
+    "director": "Zemekis",
+    "year": 1994
+},{
+    "id": 2,
+    "title": "Terminator",
+    "duration": "150",
+    "director": "Cameron",
+    "year": 1992
+}]
