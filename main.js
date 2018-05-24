@@ -17,9 +17,14 @@ class MovieListView extends View {
         //add new movie to the children and render it
     }
     render (){
-        this.children.forEach((movieView) =>{
-            this.el.appendChild(movieView.render().el);
-        });
+        if (this.children.length > 0) {
+            this.children.forEach((movieView) =>{
+                this.el.appendChild(movieView.render().el);
+            });
+        } else {
+            this.el.innerText = "No movies";
+        }
+        
     }
 }
 class MovieView extends View {  
@@ -37,9 +42,13 @@ class MovieView extends View {
 
 fetch('data.json').then((data)=> data.json())
 .then(function (result){
-    console.log(result);
+    //complex example
     let movieListView = new MovieListView(document.querySelector('#movie-list'), null, result.map(function (movie){
         return new MovieView(document.createElement('div'), movie)
     }))
     movieListView.render();
+    //simple example
+    //let movieListView = new MovieListView(document.querySelector('#movie-list'), null, [])
+    //movieListView.render()
 })
+//movieListView.addMovie(new MovieView(...))
