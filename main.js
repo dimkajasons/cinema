@@ -2,6 +2,9 @@ class View {
     constructor(el, model) {
         this.el = el;
         this.model = model;
+        // add className to the constructor and apply it to the this.el
+        //add tagName to the constructor and build element if there is no one
+        // optimize passing data to the constructor - use {}
     }
 
 }
@@ -11,7 +14,7 @@ class MovieListView extends View {
         this.children = children;
     }
     addMovie() {
-
+        //add new movie to the children and render it
     }
     render (){
         this.children.forEach((movieView) =>{
