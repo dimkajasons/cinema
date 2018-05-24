@@ -1,41 +1,42 @@
-class MovieView {
-    constructor (title, director, year, duration) {
-        this.title = title;
-        this.director = director;
-        this.year = year;
-        this.duration = duration;
-        this.el = null;
+class View {
+    constructor(el, model) {
+        this.el = el;
+        this.model = model;
     }
-    render (el) {
+
+}
+class MovieListView extends View {
+    constructor (el, model, children) {
+        super(el, model);
+        this.children = children;
+    }
+    addMovie() {
+
+    }
+    render (){
+        this.children.forEach((movieView) =>{
+            this.el.appendChild(movieView.render().el);
+        });
+    }
+}
+class MovieView extends View {  
+    constructor (el, model) {
+        super(el, model);
+    }
+    render () {
         var movie = document.createElement('div');
-        movie.textContent = `Title: ${this.title} 
-                             Year: ${this.year}`;
-        this.el = el.appendChild(movie);
-    }
-    show () {
-        if (this.el !== null) {
-            this.el.style.display = 'block';
-        }
-    }
-    hide () {
-        if (this.el !== null) {
-            this.el.style.display = 'none';
-        }
+        movie.textContent = `Title: ${this.model.title} 
+                             Year: ${this.model.year}`;
+        this.el.appendChild(movie);
+        return this;
     }
 }
-const movieList = document.getElementById('movie-list');
-var movies = [];
-function addNewMovie(data) {
-    movies.push(new MovieView(data.title, data.director, data.year, data.duration))
-}
+
 fetch('data.json').then((data)=> data.json())
 .then(function (result){
-    
-    result.forEach(function (item) {
-        addNewMovie(item);
-    })
-    movies.forEach(function (movie, i) {
-        movie.render(movieList);
-    }) 
+    console.log(result);
+    let movieListView = new MovieListView(document.querySelector('#movie-list'), null, result.map(function (movie){
+        return new MovieView(document.createElement('div'), movie)
+    }))
+    movieListView.render();
 })
-
