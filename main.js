@@ -1,54 +1,71 @@
 class View {
-    constructor(el, model) {
-        this.el = el;
-        this.model = model;
-        // add className to the constructor and apply it to the this.el
-        //add tagName to the constructor and build element if there is no one
-        // optimize passing data to the constructor - use {}
-    }
+    constructor(options/*el, model, className, tagName*/) {
+        let tag = options.tagName || 'div';
+        if (options.el) {
+            this.el = options.el;
+        } else {
+            this.el = document.createElement(tag);
+        }
+        this.model = options.model;
 
-}
-class MovieListView extends View {
-    constructor (el, model, children) {
-        super(el, model);
-        this.children = children;
+        if (options.className) {
+            this.className = options.className;
+            this.el.classList.add(this.className);
+        }   
     }
-    addMovie() {
+}
+
+class MovieListView extends View {
+    constructor (options) {
+        super(options);
+        this.children = options.children || [];
+    }
+    addMovie(movie) {
+        this.children.push(movie);
+        this.el.appendChild(movie.render().el);
         //add new movie to the children and render it
     }
     render (){
         if (this.children.length > 0) {
-            this.children.forEach((movieView) =>{
+            let renderWithParams = _.template(templates.movieListHTML);
+            this.children.forEach((movieView) => {
                 this.el.appendChild(movieView.render().el);
             });
+
         } else {
             this.el.innerText = "No movies";
         }
-        
+        return this;
     }
 }
 class MovieView extends View {  
-    constructor (el, model) {
-        super(el, model);
-    }
     render () {
-        var movie = document.createElement('div');
-        movie.textContent = `Title: ${this.model.title} 
-                             Year: ${this.model.year}`;
-        this.el.appendChild(movie);
+        var renderWithParams = _.template(templates.movieHTML);
+        this.el.textContent = renderWithParams({
+            title: this.model.title,
+            year: this.model.year
+        });
         return this;
     }
 }
 
-fetch('data.json').then((data)=> data.json())
-.then(function (result){
+// 1. Создать экземляр коллекции MovieCollection
+
+let moviesCollection = new MovieCollection(MovieModel, 'data.json');
+
+// 2. Вызываем метод fetch 
+moviesCollection.fetch().then(function (result){
+    //3
     //complex example
-    let movieListView = new MovieListView(document.querySelector('#movie-list'), null, result.map(function (movie){
-        return new MovieView(document.createElement('div'), movie)
-    }))
+    let movieListView = new MovieListView({
+        el: document.querySelector('#movie-list'),
+        className: 'list-container',
+        children: result.map(function (movie){
+            return new MovieView({
+                 model: movie,
+                 className: "movie-item"
+            })
+        })
+    });
     movieListView.render();
-    //simple example
-    //let movieListView = new MovieListView(document.querySelector('#movie-list'), null, [])
-    //movieListView.render()
 })
-//movieListView.addMovie(new MovieView(...))
