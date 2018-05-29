@@ -1,15 +1,15 @@
 //movies collection
 class Collection {
-    constructor (model,  url, children) {
-        this.Model = model; // model class 
-        this.children = children; // models stored in collection
-        this.url = url; // url to get data
+    constructor ( options/*model,  url, children*/) {
+        this.Model = options.model; // model class 
+        this.children = options.children; // models stored in collection
+        this.url = options.url; // url to get data
     }
     fetch () { // Get data from server // 1
        return fetch(this.url).then((data)=> data.json()).then((result) => {
             //2
-            this.children = result.map((movie) => {
-                return new this.Model(movie)
+            this.children = result.map((elements) => {
+                return new this.Model(elements)
             });
             return this.children;
        });
@@ -24,8 +24,12 @@ class Collection {
 }
 
 class MovieCollection extends Collection {
-    
+    constructor (options){
+        super (options)
+    }
 }
+
+
 
 class Model {
     constructor (options) {
