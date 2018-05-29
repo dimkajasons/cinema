@@ -49,9 +49,34 @@ class MovieView extends View {
     }
 }
 
+class SessionsListView extends View {
+    constructor(options) {
+        super(options)
+        this.children = options.children || [];
+    }
+    render() {
+        if (this.children.length > 0) {
+            this.children.forEach(element => {
+                this.el.appendChild(element.render().el)
+            });
+        }
+    }
+}
+
+class SessionView extends View {
+    render() {
+        this.el.textContent = `Time: ${this.model.time} Hall: ${this.model.hall}`;
+        return this;
+    }
+}
+
+
 // 1. Создать экземляр коллекции MovieCollection
 
-let moviesCollection = new MovieCollection(MovieModel, 'data.json');
+let moviesCollection = new MovieCollection({
+    model: MovieModel, 
+    url: 'data.json'
+});
 
 // 2. Вызываем метод fetch 
 moviesCollection.fetch().then(function (result){
@@ -68,4 +93,21 @@ moviesCollection.fetch().then(function (result){
         })
     });
     movieListView.render();
+})
+
+let sessionCollection = new SessionCollection({
+    model: SessionModel,
+    url: 'sessionDate.json'
+});
+
+sessionCollection.fetch().then((result) => {
+    let sessionListView = new SessionsListView({
+        el: document.querySelector("#session-list"),
+        children: result.map(function(session) {
+            return new SessionView({
+                model: session
+            })
+        })
+    })
+    sessionListView.render();
 })
