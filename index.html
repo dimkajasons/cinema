@@ -5,21 +5,84 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="main.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata|Indie+Flower" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css"/>
     <script src=https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.0/underscore-min.js defer></script>
+    <script src="test.js" defer></script>
     <script src="templates/templates.js" defer></script>
     <script src="models/movies.js" defer></script>
     <script src="models/sessions.js" defer></script>
     <script src="main.js" defer></script>
     
+    
 </head>
 <body>
-    <div id='movie-list'>
-        
-      
-    </div>
-    <div id="session-list">
-
+    <div class="grid">
+        <div class="logo">
+            <img src="img/logo.png" alt="">
+        </div>
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a href="">Films</a>
+                </li>
+                <li>
+                    <a href="">Sessions</a>
+                </li>
+            </ul>
+        </div>
+        <div id="movie-list">
+            <!-- <div class="movie">
+                <span>
+                    <img src="forrest.jpg" alt="">
+                </span>
+                <span class="movie-description">
+                    <h1>Title</h1>
+                    <p class="duration">duration</p>
+                    <p class="genre">genre</p>
+                    <p class="description">This template allows you to create poll with 
+                    many questions and answers. You can quickly and easily customize poll using
+                    different types of question like a text value, image, multiply answers and 
+                    others, setup access and privacy settings etc.</p>
+                </span> 
+            </div> -->
+        </div>
+        <div id="session-list">
+            <!-- <div class="movie">
+                <span>
+                    <img src="img/forrest.jpg" alt="">
+                </span>
+                <span class="movie-description">
+                    <h1>Title</h1>
+                    <p class="genre">genre</p>
+                    <div class="timetable">
+                        <div class="daily-timetable">
+                            <p>5 June, Sa</p>
+                            <span class="session-time">16.50</span>
+                            <span class="session-time">20.50</span>
+                        </div>
+                        <div class="daily-timetable">
+                            <p>6 June, Sa</p>
+                            <span class="session-time">16.50</span>
+                            <span class="session-time">17.50</span>
+                            <span class="session-time">19.00</span>
+                        </div>
+                        <div class="daily-timetable">
+                            <p>7 June, Sa</p>
+                            <span class="session-time">16.50</span>
+                        </div>
+                        <div class="daily-timetable">
+                            <p>5 June, Sa</p>
+                            <span class="session-time">16.50</span>
+                        </div>
+                        <div class="daily-timetable">
+                            <p>5 June, Sa</p>
+                            <span class="session-time">16.50</span>
+                        </div>
+                    </div>
+                </span>
+            </div> -->
+        </div>
     </div>
 </body>
 </html>

@@ -41,9 +41,11 @@ class MovieListView extends View {
 class MovieView extends View {  
     render () {
         var renderWithParams = _.template(templates.movieHTML);
-        this.el.textContent = renderWithParams({
+        this.el.innerHTML = renderWithParams({
             title: this.model.title,
-            year: this.model.year
+            year: this.model.year,
+            duration: this.model.duration,
+            img: this.model.img_src
         });
         return this;
     }
@@ -53,6 +55,7 @@ class SessionsListView extends View {
     constructor(options) {
         super(options)
         this.children = options.children || [];
+        this.timeTable = options.timeTable;
     }
     render() {
         if (this.children.length > 0) {
@@ -64,8 +67,16 @@ class SessionsListView extends View {
 }
 
 class SessionView extends View {
+    constructor(options){
+        super (options);
+        this.timeTable = options.model.timeTable;
+    }
     render() {
-        this.el.textContent = `Time: ${this.model.time} Hall: ${this.model.hall}`;
+        var renderWithParams = _.template(templates.sessionHTML);
+        this.el.innerHTML = renderWithParams({
+            title: this.model.title,
+            timeTable: this.model.timeTable
+        })
         return this;
     }
 }
@@ -75,7 +86,7 @@ class SessionView extends View {
 
 let moviesCollection = new MovieCollection({
     model: MovieModel, 
-    url: 'data.json'
+    url: 'filmsData.json'
 });
 
 // 2. Вызываем метод fetch 
@@ -97,7 +108,7 @@ moviesCollection.fetch().then(function (result){
 
 let sessionCollection = new SessionCollection({
     model: SessionModel,
-    url: 'sessionDate.json'
+    url: 'sessionData.json'
 });
 
 sessionCollection.fetch().then((result) => {
@@ -105,7 +116,10 @@ sessionCollection.fetch().then((result) => {
         el: document.querySelector("#session-list"),
         children: result.map(function(session) {
             return new SessionView({
-                model: session
+                model: session,
+                timeTable: result.map(function(session){
+                    return session.timeTable;
+                })
             })
         })
     })
