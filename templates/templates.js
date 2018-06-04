@@ -7,7 +7,9 @@ var dateAction = {
         return `${date.getDate()} ${months[date.getMonth()]}, ${days[date.getDay()]}`;
     },
     timeTransform: function (date) {
-        return `${date.getHours()}:${date.getMinutes()}`
+        let hours = (date.getHours() === 0) ? '00' : date.getHours();
+        let minutes = (date.getMinutes() === 0) ? '00' : date.getMinutes();
+        return `${hours}:${minutes}`;
     }
 }
 let templates = {
@@ -30,11 +32,11 @@ let templates = {
     movieListHTML:              `<div class="movie-list"> <% for(let i = 0; i < children.length; i++) { %>
                                     <%= children[0]['year'] %>
                                 <% } %>`,
-    sessionHTML: `<div class="movie">
+    sessionHTML: `<div class="session">
                     <span>
-                        <img src="img/forrest.jpg" alt="">
+                        <img src= <%= img %> alt="">
                             </span>
-                        <span class="movie-description">
+                        <div class="movie-description">
                             <h1>Title: <%= title %></h1>
                             <p class="genre">genre</p>
                             <div class="timetable">
@@ -43,10 +45,10 @@ let templates = {
                                         <div class="daily-timetable">
                                         <% let currentDate = new Date; %>
                                         <% currentDate.setDate(currentDate.getDate() + i); %>
-                                        <p> <%= dateAction.dateTransform(currentDate) %> </p>
+                                        <div class="day"> <%= dateAction.dateTransform(currentDate) %> </div>
 
                                         <% (function displaySessions () { %>
-                                            <% let currentDate = new Date %>
+                                            
                                             <% for(let i = 0; i < timeTable.length; i++) {%>
                                                 <% for(let key in timeTable[i]) { %>
                                                     <% let filmDate = new Date(key) %>
@@ -62,30 +64,7 @@ let templates = {
                                         </div>
                                     <% } %>
                                 <% })(); %>
-                                <div class="daily-timetable">
-                                    <p>5 June, Sa</p>
-                                    <span class="session-time">16.50</span>
-                                    <span class="session-time">20.50</span>
-                                </div>
-                                <div class="daily-timetable">
-                                    <p>6 June, Sa</p>
-                                    <span class="session-time">16.50</span>
-                                    <span class="session-time">17.50</span>
-                                    <span class="session-time">19.00</span>
-                                </div>
-                                <div class="daily-timetable">
-                                    <p>7 June, Sa</p>
-                                    <span class="session-time">16.50</span>
-                                </div>
-                                <div class="daily-timetable">
-                                    <p>5 June, Sa</p>
-                                    <span class="session-time">16.50</span>
-                                </div>
-                                <div class="daily-timetable">
-                                    <p>5 June, Sa</p>
-                                    <span class="session-time">16.50</span>
-                                </div>
                             </div>
-                        </span>
+                        </div>
                     </div>`
 }

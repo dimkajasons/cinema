@@ -40,14 +40,23 @@ a {
     align-items: flex-start;
     margin: 20px 300px auto auto;
 }
+.session {
+    display: flex;
+    align-items: flex-start;
+    margin: 20px 300px auto auto;
+}
 .movie-description {
+    display: block;
+    width: 80%;
     margin: 15px;
 }
 .movie-description * {
     margin: 10px;
 }
-.daily-timetable * {
-    display: inline;
+.day {
+    display: inline-block;
+    margin: 0;
+    width: 100px;
 }
 .session-time {
     margin: 0px;

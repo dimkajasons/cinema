@@ -8,7 +8,9 @@ var dateAction = {
         return `${date.getDate()} ${months[date.getMonth()]}, ${days[date.getDay()]}`;
     },
     timeTransform: function(date) {
-        return `${date.getHours()}:${date.getMinutes()}`
+        let hours = (date.getHours() === 0) ? '00' : date.getHours();
+        let minutes = (date.getMinutes() === 0) ? '00' : date.getMinutes();
+        return `${hours}:${minutes}`;
     }
 }
 console.log(dateAction.dateTransform(date))
@@ -26,8 +28,8 @@ var obj = {
     "timeTable": [
         {
             "2018, 7, 4": [
-                "2018-06-05T17:00:00Z",
-                "2018-06-05T18:30:00Z"
+                "June 4, 2018 15:00:00",
+                "June 4, 2018 19:00:00"
             ]
         },
         {
@@ -43,7 +45,7 @@ var obj = {
 };
 console.log(obj);
 function displaySessions () {
-    let currentDate = new Date;
+    let currentDate = new Date();
     for (let i = 0; i < obj.timeTable.length; i++){
         for(let key in obj.timeTable[i]) {
             let filmDate = new Date(key)
@@ -51,7 +53,7 @@ function displaySessions () {
                 for (let k = 0; k < obj.timeTable[i][key].length; k++) {
                     let time = new Date(obj.timeTable[i][key][k]);
                     let qw = new Date(time);
-
+                    console.log(dateAction.timeTransform(qw));
                 }
                 //console.log(dateAction.timeTransform(time));
             }
