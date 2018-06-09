@@ -1,4 +1,4 @@
-import View from '../models/viewModule'
+import View from '../models/viewModule.js'
 export default class MovieListView extends View {
     constructor(options) {
         super(options);

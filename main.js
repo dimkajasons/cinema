@@ -1,4 +1,9 @@
-
+import MovieCollection from '/Films/movieCollectionModule.js';
+import MovieView from './Films/movieViewModule.js';
+import MovieListView from './Films/movieListViewModule.js';
+import SessionCollection from './Sessions/sessionCollectionModule.js';
+import SessionView from './Sessions/sessionViewModule.js';
+import SessionsListView from './Sessions/sessionListViewModule.js';
 // 1. Создать экземляр коллекции MovieCollection
 
 let moviesCollection = new MovieCollection({
