@@ -19,13 +19,24 @@
     <script src="Films/movieViewModule.js" type="module" defer></script>
     <script src="Sessions/sessionCollectionModule.js" type="module" defer></script>
     <script src="Sessions/sessionListViewModule.js" type="module" defer></script>
-    <script src="Sessions/sessionModel.js" type="module" defer></script>
+    <script src="Sessions/sessionModelModule.js" type="module" defer></script>
     <script src="Sessions/sessionViewModule.js" type="module" defer></script>
     <script src="main.js" type="module" defer></script>
+    <script src="webSite.js" defer></script>
     
     
 </head>
 <body>
+    <button id="edit-button">Edit</button>
+    <div class="edit-form">
+        <form>
+            <label>Title</label><input type="text"/><br>
+            <label>Duration</label><input type="number"/><br>
+            <label>Director</label><input type="text"/><br>
+            <label>Year</label><input type="number"/><br>
+            <button id="add-movie-button">Add movie</button>
+        </form>
+    </div>
     <div class="grid">
         <div class="logo">
             <img src="img/logo.png" alt="">

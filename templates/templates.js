@@ -20,6 +20,7 @@ let templates = {
                     </span>
                     <span class="movie-description">
                         <h1>Title: <%= title %></h1>
+                        <button class="delete-film-button">X</button>
                         <p class="duration">Duration: <%= duration %></p>
                         <p class="genre">genre:</p>
                         <p class="description">This template allows you to create poll with
@@ -29,9 +30,6 @@ let templates = {
                     </span> 
                 </div>`,
                 // `Title: <%= title %> Year: <%= year %>`,
-    movieListHTML:              `<div class="movie-list"> <% for(let i = 0; i < children.length; i++) { %>
-                                    <%= children[0]['year'] %>
-                                <% } %>`,
     sessionHTML: `<div class="session">
                     <span>
                         <img src= <%= img %> alt="">
@@ -50,15 +48,15 @@ let templates = {
                                         <% (function displaySessions () { %>
                                             
                                             <% for(let i = 0; i < timeTable.length; i++) {%>
-                                                <% for(let key in timeTable[i]) { %>
-                                                    <% let filmDate = new Date(key) %>
+                                                
+                                                    <% let filmDate = new Date(timeTable[i]) %>
                                                     <% if (currentDate.getDate() === filmDate.getDate()) { %>
-                                                        <% for (let k = 0; k < timeTable[i][key].length; k++) { %>
-                                                            <% let time = new Date(timeTable[i][key][k]); %>
+                                                        
+                                                            <% let time = new Date(filmDate[i]); %>
                                                             <span class="session-time"> <%= dateAction.timeTransform(time) %> </span>
-                                                        <% } %> <br>
+                                                        
                                                     <% } %>
-                                                <% } %>
+                                                
                                             <% } %>
                                         <% })() %>
                                         </div>

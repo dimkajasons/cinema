@@ -46,6 +46,7 @@ a {
     margin: 20px 300px auto auto;
 }
 .movie-description {
+    position: relative;
     display: block;
     width: 80%;
     margin: 15px;
@@ -63,7 +64,26 @@ a {
     padding: 5px;
     border: solid #2e2d2d 2px;
 }
-
+.delete-film-button {
+    position: absolute;
+    top: 10px;
+    right: 50px;
+    display: none;
+}
+#edit-button {
+    position: fixed;
+    top: 0px;
+    right: 0px;
+}
+.edit-form {
+    position: fixed;
+    top: 100px;
+    right: 50px;
+    display: none;
+}
+.visible {
+    display: inline;
+}
 /* .list-container {
     border: 1px solid gray;
 }
