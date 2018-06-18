@@ -20,10 +20,12 @@ moviesCollection.fetch().then(function (result) {
     let movieListView = new MovieListView({
         el: document.querySelector('#movie-list'),
         className: 'list-container',
+        collection: moviesCollection,
         children: result.map(function (movie) {
             return new MovieView({
                 model: movie,
-                className: "movie-item"
+                className: "movie-item",
+                collection: moviesCollection
             })
         })
     });

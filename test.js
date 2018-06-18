@@ -13,7 +13,6 @@ var dateAction = {
         return `${hours}:${minutes}`;
     }
 }
-console.log(dateAction.dateTransform(date))
 var obj = {
     "title": "Forrest Gump",
     "timeTable": [
@@ -37,13 +36,11 @@ function displayDay () {
 }
 displayDay();
 
-console.log(obj);
 function displaySessions () {
     let currentDate = new Date();
     for (let i = 0; i < obj.timeTable.length; i++){
         let filmDate = new Date(obj.timeTable[i])
         if (filmDate.getDate() === currentDate.getDate()) {
-            console.log(obj.timeTable[i])
         }
     }
 }

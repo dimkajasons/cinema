@@ -6,14 +6,15 @@ let serverlessMovies = [{
     "duration": "142",
     "director": "Zemekis",
     "year": 1994,
-    "img_src": "img/forrest.jpg"
+    "img_src": "img/forrest.jpg",
+    "small_img": ["img/forrest.jpg", "img/terminator.jpg"]
 }, {
     "id": 2,
     "title": "Terminator",
     "duration": "150",
     "director": "Cameron",
     "year": 1992,
-    "img_src": "img/terminator.jpg"
+    "img_src": ["img/terminator.jpg"]
 }];
 
 export default class MovieCollection extends Collection {
@@ -29,7 +30,7 @@ export default class MovieCollection extends Collection {
             return this.children;
         });
     }
-    static create(movie) {
+    create(movie) {
         let p = new Promise(function (resolve, reject) {
             if (!movie) {
                 reject(new Error());
@@ -40,10 +41,15 @@ export default class MovieCollection extends Collection {
         });
         return p;
     }
-    static delete (movie) {
+    delete (id) {
+        let index = serverlessMovies.findIndex((item) => item.id === id)
         let p = new Promise(function(resolve, reject) {
-            serverlessMovies.splice(serverlessMovies.indexOf(movie), 1);
-            resolve(movie)
+            if (index !== -1) {
+                serverlessMovies.splice(index, 1);
+                resolve('OK')
+            } else (
+                reject(new Error('smth wrong'))
+            )
         })
         return p;
     }

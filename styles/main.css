@@ -45,10 +45,23 @@ a {
     align-items: flex-start;
     margin: 20px 300px auto auto;
 }
+.movie-images{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+}
+.small-images {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    border: solid red 1px;
+};
 .movie-description {
     position: relative;
     display: block;
-    width: 80%;
+    width: 70%;
     margin: 15px;
 }
 .movie-description * {
@@ -84,9 +97,3 @@ a {
 .visible {
     display: inline;
 }
-/* .list-container {
-    border: 1px solid gray;
-}
-.movie-item {
-    color: navy;
-} */

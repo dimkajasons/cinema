@@ -15,12 +15,15 @@ var dateAction = {
 let templates = {
     movieHTML: 
                 `<div class="movie">
-                    <span>
-                        <img src= <%= img %> alt="">
+                    <span class="movie-images">
+                        <div class="image-wrapper"></div>
+                        <div class="small-images">
+                            
+                        </div>
                     </span>
                     <span class="movie-description">
                         <h1>Title: <%= title %></h1>
-                        <button class="delete-film-button">X</button>
+                        <button class="delete-film-button" type="button">X</button>
                         <p class="duration">Duration: <%= duration %></p>
                         <p class="genre">genre:</p>
                         <p class="description">This template allows you to create poll with
