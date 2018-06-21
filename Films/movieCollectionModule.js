@@ -7,7 +7,7 @@ let serverlessMovies = [{
     "director": "Zemekis",
     "year": 1994,
     "img_src": "img/forrest.jpg",
-    "small_img": ["img/forrest.jpg", "img/terminator.jpg"]
+    "small_img": ["img/forrest.jpg", "img/terminator.jpg", "img/forrest.jpg"]
 }, {
     "id": 2,
     "title": "Terminator",
@@ -15,17 +15,58 @@ let serverlessMovies = [{
     "director": "Cameron",
     "year": 1992,
     "img_src": ["img/terminator.jpg"]
-}];
-
-export default class MovieCollection extends Collection {
+}, {
+    "id": 3,
+    "title": "Forrest Gump",
+    "duration": "142",
+    "director": "Zemekis",
+    "year": 1994,
+    "img_src": "img/forrest.jpg",
+    "small_img": ["img/forrest.jpg", "img/terminator.jpg", "img/forrest.jpg"]
+}, {
+    "id": 4,
+    "title": "Forrest Gump",
+    "duration": "142",
+    "director": "Zemekis",
+    "year": 1994,
+    "img_src": "img/forrest.jpg",
+    "small_img": ["img/forrest.jpg", "img/terminator.jpg", "img/forrest.jpg"]
+}, {
+    "id": 5,
+    "title": "Forrest Gump",
+    "duration": "142",
+    "director": "Zemekis",
+    "year": 1994,
+    "img_src": "img/forrest.jpg",
+    "small_img": ["img/forrest.jpg", "img/terminator.jpg", "img/forrest.jpg"]
+}, {
+    "id": 6,
+    "title": "Forrest Gump",
+    "duration": "142",
+    "director": "Zemekis",
+    "year": 1994,
+    "img_src": "img/forrest.jpg",
+    "small_img": ["img/forrest.jpg", "img/terminator.jpg", "img/forrest.jpg"]
+}, {
+    "id": 7,
+    "title": "Forrest Gump",
+    "duration": "142",
+    "director": "Zemekis",
+    "year": 1994,
+    "img_src": "img/forrest.jpg",
+    "small_img": ["img/forrest.jpg", "img/terminator.jpg", "img/forrest.jpg"]
+},
+];
+class MovieCollection extends Collection {
     constructor(options) {
-        super(options)
+        super(options);
     }
-    fetch() {
-        return Promise.resolve(serverlessMovies).then((result) => {
+    fetch(lastId) {
+        return Promise.resolve(serverlessMovies.slice(lastId, lastId + 5)).then((result) => {
             //2
             this.children = result.map((element) => {
-                return new this.Model(element)
+                return new this.Model(element);
+                lastId = element.id;
             });
             return this.children;
         });
@@ -41,9 +82,9 @@ export default class MovieCollection extends Collection {
         });
         return p;
     }
-    delete (id) {
+    delete(id) {
         let index = serverlessMovies.findIndex((item) => item.id === id)
-        let p = new Promise(function(resolve, reject) {
+        let p = new Promise(function (resolve, reject) {
             if (index !== -1) {
                 serverlessMovies.splice(index, 1);
                 resolve('OK')
@@ -54,3 +95,4 @@ export default class MovieCollection extends Collection {
         return p;
     }
 }
+export default MovieCollection;

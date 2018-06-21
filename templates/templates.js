@@ -7,8 +7,9 @@ var dateAction = {
         return `${date.getDate()} ${months[date.getMonth()]}, ${days[date.getDay()]}`;
     },
     timeTransform: function (date) {
-        let hours = (date.getHours() === 0) ? '00' : date.getHours();
-        let minutes = (date.getMinutes() === 0) ? '00' : date.getMinutes();
+        let localDate = new Date(date);
+        let hours = (localDate.getHours() === 0) ? '00' : localDate.getHours();
+        let minutes = (localDate.getMinutes() === 0) ? '00' : localDate.getMinutes();
         return `${hours}:${minutes}`;
     }
 }
@@ -46,21 +47,20 @@ let templates = {
                                         <div class="daily-timetable">
                                         <% let currentDate = new Date; %>
                                         <% currentDate.setDate(currentDate.getDate() + i); %>
-                                        <div class="day"> <%= dateAction.dateTransform(currentDate) %> </div>
+                                        <div class="day" data-day="<%=currentDate %>"> <%= dateAction.dateTransform(currentDate) %> </div>
 
                                         <% (function displaySessions () { %>
                                             
-                                            <% for(let i = 0; i < timeTable.length; i++) {%>
-                                                
-                                                    <% let filmDate = new Date(timeTable[i]) %>
-                                                    <% if (currentDate.getDate() === filmDate.getDate()) { %>
-                                                        
-                                                            <% let time = new Date(filmDate[i]); %>
-                                                            <span class="session-time"> <%= dateAction.timeTransform(time) %> </span>
-                                                        
-                                                    <% } %>
-                                                
-                                            <% } %>
+                                            <% let newArr = timeTable.filter(function(el){%>
+                                                <% let filmDate = new Date(el); %>
+                                                <% return filmDate.getDate() === currentDate.getDate(); %>
+                                            <% }); %>        
+                                            <% newArr.sort(function (a, b) { %>            
+                                                <% return new Date(a) - new Date(b); %>            
+                                            <% }) %>                    
+                                            <% newArr.forEach(function (el) { %>                
+                                                <button class="session-time" type="button" data-time="<%=el %>"> <%= dateAction.timeTransform(el) %> </buuton>            
+                                            <% }) %>
                                         <% })() %>
                                         </div>
                                     <% } %>

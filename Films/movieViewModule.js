@@ -28,13 +28,17 @@ export default class MovieView extends View {
             srcs.map((src) => {
                 loadImage(src).then((img) => {
                     this.el.querySelector('.small-images').appendChild(img);
-                }).catch(function(err) {
+                    img.classList.add('small-image');
+                }).catch(function (err) {
                     console.log(err);
                 })
             })
-        }).catch(function(err) {
+        }).catch(function (err) {
             console.log(err);
         })
+        if (document.querySelector('#movie-list').children.length % 2 === 0) {
+            this.el.classList.add('backgtound-color-class');
+        }
         return this;
     }
     destroy() {

@@ -1,4 +1,4 @@
-var date = new Date;
+//var date = new Date;
 var dateAction = {
     dateTransform: function (date) {
         let days = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
@@ -16,11 +16,11 @@ var dateAction = {
 var obj = {
     "title": "Forrest Gump",
     "timeTable": [
-        "June 13, 2018 20:00:00",
-        "June 9, 2018 21:30:00",
-        "June 10, 2018 21:30:00",
-        "June 9, 2018 21:40:00",
-        "June 11, 2018 21:30:00"
+        "June 24, 2018 20:00:00",
+        "June 22, 2018 21:30:00",
+        "June 22, 2018 21:00:00",
+        "June 23, 2018 21:40:00",
+        "June 20, 2018 21:30:00"
     ],
     "duration": 150,
     "hall": 2,
@@ -28,20 +28,39 @@ var obj = {
 };
 
 function displayDay () {
+    obj.timeTable.sort(function (a, b) {
+        return new Date(a) - new Date(b)
+    })
     for (let i = 0; i < 7; i++) {
         let currentDate = new Date;
         currentDate.setDate(currentDate.getDate() + i);
-
+        //console.log(currentDate)
+        function displaySessions() {
+            var newArr = obj.timeTable.filter(function(el) {
+                var filmDate = new Date(el);
+                return filmDate.getDate() === currentDate.getDate();
+            });
+            newArr.sort(function (a, b) {
+                return new Date(a) - new Date(b);
+            })
+            //console.log(newArr)
+            // for (let i = 0; i < obj.timeTable.length; i++) {
+            //     let filmDate = new Date(obj.timeTable[i])
+            //     if (filmDate.getDate() === currentDate.getDate()) {
+            //     }
+            // }
+        };
+        displaySessions();
     }
 }
 displayDay();
 
-function displaySessions () {
-    let currentDate = new Date();
-    for (let i = 0; i < obj.timeTable.length; i++){
-        let filmDate = new Date(obj.timeTable[i])
-        if (filmDate.getDate() === currentDate.getDate()) {
-        }
-    }
-}
-displaySessions()
+// function displaySessions () {
+//     let currentDate = new Date();
+//     for (let i = 0; i < obj.timeTable.length; i++){
+//         let filmDate = new Date(obj.timeTable[i])
+//         if (filmDate.getDate() === currentDate.getDate()) {
+//         }
+//     }
+// }
+// displaySessions()

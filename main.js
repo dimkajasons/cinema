@@ -30,7 +30,9 @@ moviesCollection.fetch().then(function (result) {
         })
     });
     movieListView.render();
+    movieListView.addLoadMarker();
 })
+
 
 let sessionCollection = new SessionCollection({
     model: SessionModel,
@@ -51,3 +53,5 @@ sessionCollection.fetch().then((result) => {
     })
     sessionListView.render();
 })
+
+export {moviesCollection};
