@@ -51,7 +51,9 @@ export default class MovieView extends View {
             console.log(err);
         })
         if (document.querySelector('#movie-list').children.length % 2 === 0) {
-            this.el.classList.add('backgtound-color-class');
+            this.el.classList.add('background-color-class');
+        } else {
+            this.el.classList.add('background-color-class2')
         }
         return this;
     }

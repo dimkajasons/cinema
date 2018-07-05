@@ -15,7 +15,7 @@ let moviesCollection = new MovieCollection({
 });
 
 // 2. Вызываем метод fetch 
-moviesCollection.fetch().then(function (result) {
+moviesCollection.fetch(0).then(function (result) {
     //3
     //complex example
     let movieListView = new MovieListView({
@@ -33,7 +33,6 @@ moviesCollection.fetch().then(function (result) {
     movieListView.render();
     movieListView.addLoadMarker();
 })
-
 
 let sessionCollection = new SessionCollection({
     model: SessionModel,
@@ -53,6 +52,25 @@ sessionCollection.fetch().then((result) => {
         })
     })
     sessionListView.render();
+})
+
+let nav = document.querySelector('.navigation');
+nav.addEventListener('click', function (e) {
+    e.preventDefault();
+    if (e.target.classList.contains('nav-films')) {
+        var stateObj = { foo: e.target.href };
+        history.pushState(stateObj, e.target.href, e.target.href);
+        document.querySelector('#movie-list').style.display = 'block';
+        document.querySelector('#session-list').style.display = 'none';
+    } else if (e.target.classList.contains('nav-sessions')) {
+        var stateObj = { foo: e.target.href };
+        history.pushState(stateObj, e.target.href, e.target.href);
+        document.querySelector('#movie-list').style.display = 'none';
+        document.querySelector('#session-list').style.display = 'block';
+    }
+})
+window.addEventListener('popstate', function (e) {
+    console.log(e.state.foo);
 })
 
 export {moviesCollection};

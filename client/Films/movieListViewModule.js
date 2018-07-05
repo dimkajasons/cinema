@@ -20,9 +20,10 @@ export default class MovieListView extends View {
                 collection: this.collections
             }))).catch((e) => console.log(e))
         }.bind(this));
-        document.addEventListener('scroll', function (e) {
-            dynamicLoader(document.querySelector('.load-marker'))
-        });
+        //throttled = _.throttle(dynamicLoader(document.querySelector('.load-marker')), 10000);
+        // document.addEventListener('scroll', function (e) {
+        //     dynamicLoader(document.querySelector('.load-marker'));
+        // });
     }
     addMovie(movie) {
         this.children.push(movie);
@@ -38,9 +39,10 @@ export default class MovieListView extends View {
                 this.el.appendChild(movieView.render().el);
             });
 
-        } else {
-            this.el.innerText = "No movies";
         }
+        //  else {
+        //     this.el.innerText = "No movies";
+        // }
         return this;
     }
 }
