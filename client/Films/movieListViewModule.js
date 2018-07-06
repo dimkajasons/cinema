@@ -1,7 +1,8 @@
 import View from '../models/viewModule.js';
 import MovieCollection from './movieCollectionModule.js';
 import MovieView from './movieViewModule.js';
-import dynamicLoader from '../jqueryEvent.js'
+import dynamicLoader from '../jqueryEvent.js';
+import * as _  from '../node_modules/lodash/lodash.js';
 export default class MovieListView extends View {
     constructor(options) {
         super(options);
@@ -20,10 +21,10 @@ export default class MovieListView extends View {
                 collection: this.collections
             }))).catch((e) => console.log(e))
         }.bind(this));
-        //throttled = _.throttle(dynamicLoader(document.querySelector('.load-marker')), 10000);
-        // document.addEventListener('scroll', function (e) {
-        //     dynamicLoader(document.querySelector('.load-marker'));
-        // });
+        let throttled = _.throttle(dynamicLoader(document.querySelector('.load-marker')), 10000);
+        document.addEventListener('scroll', function (e) {
+            throttled();
+        });
     }
     addMovie(movie) {
         this.children.push(movie);

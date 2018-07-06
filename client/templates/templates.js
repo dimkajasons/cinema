@@ -17,7 +17,9 @@ let templates = {
     movieHTML: 
                 `<div class="movie">
                     <span class="movie-images">
-                        <div class="image-wrapper"></div>
+                        <div class="image-wrapper">
+                            <div class="film-sessions"></div>
+                        </div>
                         <div class="small-images">
                             
                         </div>

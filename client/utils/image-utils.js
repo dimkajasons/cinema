@@ -1,3 +1,4 @@
+
 function loadImage(url, callback) {
     return new Promise(function (resolve, reject) {
         let image = new Image();
@@ -8,7 +9,7 @@ function loadImage(url, callback) {
         image.onerror = function () {
             reject(new Error('wrong url'))
         }
-        image.src = url;
+        image.src = `../img/${url}`;
     });
 
     /*

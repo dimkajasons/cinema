@@ -6,6 +6,7 @@ var $win = $(window);
 var lastChild = 0;
 var currentChildQuantity = document.querySelector('#movie-list').childElementCount;
 function dynamicLoader(elem) {
+    alert(5);
     lastChild = document.querySelector('#movie-list').childElementCount;
 
     currentChildQuantity = document.querySelector('#movie-list').childElementCount;
