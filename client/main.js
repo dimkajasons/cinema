@@ -6,7 +6,7 @@ import SessionCollection from './Sessions/sessionCollectionModule.js';
 import SessionModel from './Sessions/sessionModelModule.js';
 import SessionView from './Sessions/sessionViewModule.js';
 import SessionsListView from './Sessions/sessionListViewModule.js';
-
+// import './styles/main.css';
 // 1. Создать экземляр коллекции MovieCollection
 
 let moviesCollection = new MovieCollection({

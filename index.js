@@ -32,7 +32,7 @@ app.get('/api/sessions', (req, res) => {
 })
 app.get('/api/movies', (req, res) => {
     let resMovies;
-    resMovies = movies.slice(req.query.lastChild, req.query.lastChild + 5);
+    resMovies = movies.slice(+req.query.lastChild, +req.query.lastChild + 5);
     res.send(resMovies);
 });
 

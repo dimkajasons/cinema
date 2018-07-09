@@ -1,16 +1,20 @@
 import View from '../models/viewModule.js';
 import loadImage from '../utils/image-utils.js';
+import _ from 'lodash';
+import {templates as templ} from '../templates/templates.js';
+import {dateAction as dateActionForTemplate} from '../utils/dateTransformModule.js';
 export default class MovieView extends View {
     constructor(options) {
         super(options);
         this.collection = options.collection;
     }
     render() {
-        var renderWithParams = _.template(templates.movieHTML);
+        var renderWithParams = _.template(templ.movieHTML);
         this.el.innerHTML = renderWithParams({
             title: this.model.title,
             year: this.model.year,
-            duration: this.model.duration
+            duration: this.model.duration,
+            dateAction: dateActionForTemplate
         });
         this.el.querySelector('.delete-film-button').addEventListener('click', () =>
             this.collection.delete(this.model.id)

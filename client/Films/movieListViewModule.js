@@ -2,7 +2,7 @@ import View from '../models/viewModule.js';
 import MovieCollection from './movieCollectionModule.js';
 import MovieView from './movieViewModule.js';
 import dynamicLoader from '../jqueryEvent.js';
-import * as _  from '../node_modules/lodash/lodash.js';
+import  _  from 'lodash';
 export default class MovieListView extends View {
     constructor(options) {
         super(options);
@@ -21,10 +21,10 @@ export default class MovieListView extends View {
                 collection: this.collections
             }))).catch((e) => console.log(e))
         }.bind(this));
-        let throttled = _.throttle(dynamicLoader(document.querySelector('.load-marker')), 10000);
-        document.addEventListener('scroll', function (e) {
-            throttled();
-        });
+        // let throttled = _.throttle(dynamicLoader(document.querySelector('.load-marker')), 10000);
+        // document.addEventListener('scroll', function (e) {
+        //     throttled();
+        // });
     }
     addMovie(movie) {
         this.children.push(movie);
@@ -33,13 +33,16 @@ export default class MovieListView extends View {
     }
     addLoadMarker() {
         this.el.children[this.el.children.length - 2].classList.add('load-marker');
+        let throttled = _.throttle(() => dynamicLoader(document.querySelector('.load-marker')), 5000);
+        document.addEventListener('scroll', function (e) {
+            throttled();
+        });
     }
     render() {
         if (this.children.length > 0) {
             this.children.forEach((movieView) => {
                 this.el.appendChild(movieView.render().el);
             });
-
         }
         //  else {
         //     this.el.innerText = "No movies";
